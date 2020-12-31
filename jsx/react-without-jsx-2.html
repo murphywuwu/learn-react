@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add React in One Minute</title>
+</head>
+<!-- https://gist.github.com/gaearon/6668a1f6986742109c00a581ce704605 -->
+<body>
+  <h2>Add React in One Minute</h2>
+  <p>This page demonstrates using React with no build tooling.</p>
+  <p>React is loaded as a script tag</p>
+
+  <!-- We will put our React Component inside this div. -->
+  <div id="like_button_container"></div>
+
+  <!-- Load React. -->
+  <!-- Note: whe deploying, replace 'development.js' with 'productiuon.js'. -->
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Load our React Component -->
+  <script src="like_button.js"></script>
+</body>
+</html>
