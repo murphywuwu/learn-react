@@ -58,6 +58,7 @@ function _createClass = function () {
   };
 }();
 
+/* class type elements */
 var Hello = function(_React$Component) {
   _inherits(Hello, _React$Component)
 
@@ -84,6 +85,7 @@ var Hello = function(_React$Component) {
   return Hello;
 }(React.Component)
 
+/* function type elements */
 function Welcome(props) {
   return React.createElement(
     'h1',
@@ -93,11 +95,23 @@ function Welcome(props) {
   );
 }
 
+/* normal type elements */
+// an element is a plain object describing a component instance or DOM node and its desired properties
 var element = React.createElement(
   'h1',
   { className: 'greeting' },
   'Hello, world!'
 )
+
+// {
+//   type: 'h1',
+//   props: {
+//     className: 'greeting',
+//     children: 'Hello, world!'
+//   }
+// }
+
+// <h1 class="greeting">'Hello, world!'</h1>
 
 var domContainer = document.querySelector('#like_button_container');
 ReactDom.render(React.createElement(Hello, { toWhat: 'World' }), domContainer)
