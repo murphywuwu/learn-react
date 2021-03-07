@@ -25,6 +25,7 @@ function _inherits(subClass, superClass) {
 }
 
 function _classCallCheck(instance, Constructor) {
+  // 检查函数是否通过new调用
   if (!instance instanceof Constructor) {
     throw new TypeError('Cannot call a class as a function');
   }

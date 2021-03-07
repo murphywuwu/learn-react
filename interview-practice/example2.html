@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React with JSX</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Don't use this in productiuon -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    export default class App extends React.Component {
+      state = {
+        count: 0
+      }
+
+      changeState() {
+        const newCount = this.state.count + 1;
+        this.setState({
+          count: this.state.count + 1
+        });
+
+        if (newCount === this.state.count) {
+          console.log('同步执行render');
+        }
+        else {
+          console.log('异步执行render');
+        }
+      }
+
+      changeState2() {
+        const newCount = this.state.count + 1;
+
+        Promise.resolve().then(() => {
+          this.setState({
+            count: this.state.count + 1
+          });
+
+          if (newCount === this.state.count){
+            console.log('同步执行render');
+          }
+          else {
+            console.log('异步执行render');
+          }
+        });
+      }
+
+      render() {
+        return (
+          <div>
+            <p>当前count={this.state.count}</p>
+            <button onClick={this.changeState}>异步+1</button>
+            <button onClick={thi.changeState2}>同步+1</button>
+          </div>
+        )
+      }
+    }
+  </script>
+</body>
+</html>

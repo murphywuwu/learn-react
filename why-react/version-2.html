@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>结构复用</title>
+</head>
+<body>
+  <div class="wrapper">
+
+  </div>
+  <script>
+    const createDOMFromString = (domString) => {
+      const div = document.createElement('div');
+      div.innerHTML = domString;
+      return div;
+    }
+
+    class LikeButton {
+      constructor() {
+        this.state = { isLiked: false  }
+      }
+
+      changeLikeText() {
+        const likeText = this.el.querySelector('.like-text');
+        this.state.isLiked = !this.state.isLiked;
+        
+        // 状态改变 -> 手动更改DOM元素
+        // 如果组件依赖了很多状态，那么你的组件基本是DOM操作
+        // 手动管理DOM和状态的关系会导致代码可维护性变差、容易出错
+        likeText.innerHTML = this.state.isLiked ? '取消' : '点赞';
+      }
+
+      render() {
+        this.el = createDOMFromString(
+          `
+          <button id="like-btn">
+            <span class="like-text">点赞</span>
+            <span>👍</span>
+          </button>
+          `
+        );
+
+        this.el.addEventListener('click', this.changeLikeText.bind(this), false)
+
+        return this.el;
+      }
+    }
+
+    const wrapper = document.querySelector('.wrapper');
+    const likeButton1 = new LikeButton();
+    wrapper.appendChild(likeButton1.render());
+
+    const likeButton2 = new LikeButton();
+    wrapper.appendChild(likeButton2.render());
+  </script>
+</body>
+</html>

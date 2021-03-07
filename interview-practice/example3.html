@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React with JSX</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Don't use this in productiuon -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { date: new Date() }
+      }
+
+      componentDidMount() {
+        // runs after the component output has been rendered to the DOM
+        this.timerId = setInterval(
+          () => this.tick(),
+          1000
+        )
+      }
+
+      tick() {
+        this.setState({
+          date: new Date()
+        })       
+      }
+
+      // runs after the component ever removed from DOM 
+      componentWillUnmount() {
+        clearInterval(this.timerId);
+      }
+
+      render () {
+        return (
+          <div>
+            <h1>Hello, World!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}</h2>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Clock/>,
+      document.getElementById('root')
+    )
+  </script>
+</body>
+</html>

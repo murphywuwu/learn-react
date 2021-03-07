@@ -83,7 +83,7 @@ class Clock extends React.Component {
 let domContainer = document.querySelector('#like_button_container');
 // ReactDOM.render(<LikeButton />, domContainer);
 ReactDOM.render(
-  element,
+  Hello,
   domContainer
 )
 

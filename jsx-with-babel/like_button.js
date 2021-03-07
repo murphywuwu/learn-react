@@ -146,4 +146,4 @@ var Clock = function (_React$Component2) {
 
 var domContainer = document.querySelector('#like_button_container');
 // ReactDOM.render(<LikeButton />, domContainer);
-ReactDOM.render(element, domContainer);
+ReactDOM.render(Hello, domContainer);

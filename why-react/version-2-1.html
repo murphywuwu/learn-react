@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据和DOM解耦</title>
+</head>
+<body>
+  <div class="wrapper">
+    <button class="like-btn">
+      <span class="like-text">点赞</span>
+      <span>👍</span>
+    </button>
+  </div>
+
+  <script>
+    const state  = {
+      data: {},
+      set: (data) => {
+        this.data = data;
+      },
+      get: () => {
+        return this.data;
+      }
+    }
+
+    class LikeBtn {
+      init() {
+        
+      }
+
+      changeText() {
+        this.emit('')
+      }
+
+      render() { 
+        document.querySelector('.like-btn').addEventListener('click', this.changeText.bind(this))
+      }
+    }
+    
+  </script>
+</body>
+</html>

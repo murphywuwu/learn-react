@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>状态改变 -> 构建新的DOM元素更新页面</title>
+</head>
+<body>
+  <div class="wrapper"></div>
+  <script>
+    const createDOMFromString = (domString) => {
+      const div = document.createElement('div');
+      div.innerHTML = domString;
+      return div;
+    }
+
+    class LikeButton {
+      constructor(root) {
+        this.state = { isLiked: false  }
+        this.root = document.querySelector(root);
+        this.first_render = true;
+
+        // 首次渲染
+        this.render();
+      }
+
+      setState (state) {
+        const oldEl = this.el;
+        // 更改state
+        this.state = state;
+        // 手动渲染DOM
+        this.el = this.render();
+        if (this.onStateChange) this.onStateChange(oldEl, this.el);
+      }
+
+      onStateChange(oldEl, newEl) {
+        this.root.insertBefore(newEl,oldEl);
+        this.root.removeChild(oldEl);
+      }
+
+      changeLikeText() {
+        this.setState({
+          isLiked: !this.state.isLiked
+        })
+      }
+
+      initial() {
+        this.root.appendChild(this.el);
+        this.first_render = false;
+      }
+
+      render() {
+        // 构建DOM
+        this.el = createDOMFromString(
+          `
+          <button id="like-btn">
+            <span class="like-text">${this.state.isLiked ? '取消' : '点赞'}</span>
+            <span>👍</span>
+          </button>
+          `
+        );
+
+        this.el.addEventListener('click', this.changeLikeText.bind(this), false)
+
+        if (this.first_render) {
+          this.initial();
+        }
+
+        return this.el;
+      }
+    }
+
+    // const wrapper = document.querySelector('.wrapper');
+    const likeButton1 = new LikeButton('.wrapper');
+    // wrapper.appendChild(likeButton1.render());
+
+    const likeButton2 = new LikeButton('.wrapper');
+    // wrapper.appendChild(likeButton2.render());
+  </script>
+</body>
+</html>

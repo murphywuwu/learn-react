@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React with JSX</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Don't use this in productiuon -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <!-- https://zhuanlan.zhihu.com/p/105276393 -->
+  <div id="root"></div>
+  <script type="text/babel">
+    const { createRef, useRef } = React;
+
+    function App() {
+      const [renderIndex, setRenderIndex] = React.useState(1);
+      const refFromuUserRef = useRef();
+      const refFromCreateRef = createRef();
+
+      if (!refFromuUserRef.current) {
+        console.log('refFromuUserRef',refFromuUserRef)
+        refFromuUserRef.current = renderIndex;
+      }
+      if (!refFromCreateRef.current) {
+        console.log('refFromCreateRef', refFromCreateRef)
+        refFromCreateRef.current = renderIndex;
+      }
+
+      return (
+        <>
+          <p>Current render index: { renderIndex }</p>
+          <p>
+            <b>refFromUseRef</b> value: {refFromuUserRef.current}
+          </p>
+          <p>
+            <b>refFromCreateRef</b> value: {refFromCreateRef.current}
+          </p>
+          <button onClick={() => setRenderIndex(prev => prev + 1)}>
+            Cause re-render
+          </button>
+        </>
+      )
+    }
+
+    ReactDOM.render(
+      <App/>,
+      document.getElementById('root')
+    )
+  </script>
+</body>
+</html>
